@@ -39,6 +39,14 @@ lexis_corpus_process <- function(data, text_var) {
   german_stopwords <- read.csv(text = german_stopwords, header = F)
   german_stopwords <- german_stopwords$V1
 
+  italian_stopwords <- RCurl::getURL("https://raw.githubusercontent.com/stopwords-iso/stopwords-it/master/stopwords-it.txt", encoding = "UTF-8")
+  italian_stopwords <- read.csv(text = italian_stopwords, header = F)
+  italian_stopwords <- italian_stopwords$V1
+
+  dutch_stopwords <- RCurl::getURL("https://raw.githubusercontent.com/stopwords-iso/stopwords-nl/master/stopwords-nl.txt", encoding = "UTF-8")
+  dutch_stopwords <- read.csv(text = dutch_stopwords, header = F)
+  dutch_stopwords <- dutch_stopwords$V1
+
   # Create corpus object
   corpus <<- tm::Corpus(tm::DataframeSource(data),
                         readerControl = list(language = c("en", "es", "fr", "de", "it")))
@@ -50,12 +58,16 @@ lexis_corpus_process <- function(data, text_var) {
   processedCorpus <- tm::tm_map(processedCorpus, tm::removeWords, spanish_stopwords)
   processedCorpus <- tm::tm_map(processedCorpus, tm::removeWords, french_stopwords)
   processedCorpus <- tm::tm_map(processedCorpus, tm::removeWords, german_stopwords)
+  processedCorpus <- tm::tm_map(processedCorpus, tm::removeWords, italian_stopwords)
+  processedCorpus <- tm::tm_map(processedCorpus, tm::removeWords, dutch_stopwords)
   processedCorpus <- tm::tm_map(processedCorpus, tm::removePunctuation, preserve_intra_word_dashes = TRUE)
   processedCorpus <- tm::tm_map(processedCorpus, tm::removeNumbers)
   processedCorpus <- tm::tm_map(processedCorpus, tm::stemDocument, language = "en")
   processedCorpus <- tm::tm_map(processedCorpus, tm::stemDocument, language = "es")
   processedCorpus <- tm::tm_map(processedCorpus, tm::stemDocument, language = "fr")
   processedCorpus <- tm::tm_map(processedCorpus, tm::stemDocument, language = "de")
+  processedCorpus <- tm::tm_map(processedCorpus, tm::stemDocument, language = "it")
+  processedCorpus <- tm::tm_map(processedCorpus, tm::stemDocument, language = "nl")
   processedCorpus <- tm::tm_map(processedCorpus, tm::stripWhitespace)
 
   processedCorpus <<- processedCorpus

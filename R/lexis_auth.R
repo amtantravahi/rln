@@ -9,6 +9,7 @@ lexis_auth <- function(key, secret) {
                                 access = "https://auth-api.lexisnexis.com/oauth/v2/token")
 
 
+
   auth.code <<- httr::oauth2.0_token(endpoint = lexis,
                                      app = httr::oauth_app(appname = "lexis_api",
                                                            key=key, secret=secret),
@@ -17,7 +18,4 @@ lexis_auth <- function(key, secret) {
                                      use_basic_auth = T,
                                      user_params = lexis,
                                      cache = F)
-
-
-
-}
+  }
