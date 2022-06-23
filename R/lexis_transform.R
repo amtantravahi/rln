@@ -23,7 +23,7 @@ lexis_transform <- function(data, orig_data) {
            french =  as.integer(stringr::str_detect(keyword_ln,"FRENCH")),
            english =  as.integer(stringr::str_detect(keyword_ln,"ENGLISH|English")),
            spanish =  as.integer(stringr::str_detect(keyword_ln,"SPANISH")),
-           italian =  as.integer(stringr::str_detect(keyword_ln,"ITALIAN|Italian|Italiano")),
+           italian =  as.integer(stringr::str_detect(keyword_ln,"ITALIAN|Italiano|Italian")),
            german =  as.integer(stringr::str_detect(keyword_ln,"GERMAN")),
            dutch =  as.integer(stringr::str_detect(keyword_ln,"DUTCH"))
     )
@@ -36,7 +36,7 @@ lexis_transform <- function(data, orig_data) {
                                     ifelse(spanish == 1, "Spanish",
                                            ifelse(german == 1, "German",
                                                   ifelse(italian == 1, "Italian",
-                                                         ifelse(dutch == 1, "Dutch"))))))
+                                                         ifelse(dutch == 1, "Dutch", ""))))))
     )
 
   # Convert pub_date to date type
@@ -56,7 +56,8 @@ lexis_transform <- function(data, orig_data) {
                      "COLUMN,", "Magazine,", "NEGATIVE PERSONAL NEWS,", "  NEGATIVE MISC NEWS,",
                      "NEGATIVE NEWS,", "Newspaper;", "BLOGS & MESSAGE BOARDS,", "NEWSPAPER,",
                      "Newsletter,", "Newsletters,", "Giornale,", "ITALIANO,", "Agenzia Stampa,",
-                     "NEWS BRIEFS,", "News,", "General News,", "DUTCH,", "Periódico,")
+                     "NEWS BRIEFS,", "News,", "General News,", "DUTCH,", "Periódico,", "Italian / Italiano,"
+                     )
 
   result_clean$keyword <- sapply(result_clean$keyword_ln, function(x)
     gsub(paste(wordstoremove, collapse = '|'), '', x))
