@@ -53,7 +53,7 @@ lexis_transform <- function(data, orig_data) {
                      "Industry Trade Press,", "Zeitung,", "DEUTSCH,", "NEWSPAPER,",
                      "COLUMN,", "Magazine,", "NEGATIVE PERSONAL NEWS,", "  NEGATIVE MISC NEWS,",
                      "NEGATIVE NEWS,", "Newspaper;", "BLOGS & MESSAGE BOARDS,", "NEWSPAPER,",
-                     "Newsletter,", "Newsletters,")
+                     "Newsletter,", "Newsletters,", "Giornale,", "ITALIANO,", "Agenzia Stampa,")
 
   result_clean$keyword <- sapply(result_clean$keyword_ln, function(x)
     gsub(paste(wordstoremove, collapse = '|'), '', x))
