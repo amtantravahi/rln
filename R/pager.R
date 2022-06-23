@@ -9,42 +9,42 @@ pager <- function(x) {
 
 
   # Parse data as XML
-  doc <- read_xml(x)
+  doc <- xml2::read_xml(x)
 
   # Parse as HTML for any HTML stored in the string
-  doc_html <- read_html(x)
+  doc_html <- xml2::read_html(x)
 
   # Extract data into a seperate dataframe
   data.frame(title = doc %>%
-               xml_find_one(xpath = "//nitf:hedline") %>%
-               html_text(),
+               xml2::xml_find_one(xpath = "//nitf:hedline") %>%
+               rvest::html_text(),
              pub_date = doc_html %>%
-               html_node("published") %>%
-               html_text(),
+               rvest::html_node("published") %>%
+               rvest::html_text(),
              author = doc_html %>%
-               html_node("author") %>%
-               html_text(),
+               rvest::html_node("author") %>%
+               rvest::html_text(),
              dateline = doc %>%
-               xml_find_one(xpath = "//nitf:dateline") %>%
-               html_text(),
+               xml2::xml_find_one(xpath = "//nitf:dateline") %>%
+               rvest::html_text(),
              main_text = doc %>%
-               xml_find_one(xpath = "//bodyText") %>%
-               html_text(),
+               xml2::xml_find_one(xpath = "//bodyText") %>%
+               rvest::html_text(),
              publisher = doc %>%
-               xml_find_one(xpath = "//publicationName") %>%
-               html_text(),
+               xml2::xml_find_one(xpath = "//publicationName") %>%
+               rvest::html_text(),
              pub_date_txt = doc %>%
-               xml_find_one(xpath = "//dateText") %>%
-               html_text(),
+               xml2::xml_find_one(xpath = "//dateText") %>%
+               rvest::html_text(),
              copyright = doc %>%
-               xml_find_one(xpath ="//copyright") %>%
-               html_text(),
+               xml2::xml_find_one(xpath ="//copyright") %>%
+               rvest::html_text(),
              lexis_id = doc_html %>%
-               html_node("id") %>%
-               html_text(),
+               rvest::html_node("id") %>%
+               rvest::html_text(),
              keyword_ln = doc %>%
-               xml_find_all("//className") %>%
-               xml_text()
+               xml2::xml_find_all("//className") %>%
+               xml2::xml_text()
   )
 
 
