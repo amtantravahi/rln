@@ -40,23 +40,23 @@ lexis_corpus_process <- function(data, text_var) {
   german_stopwords <- german_stopwords$V1
 
   # Create corpus object
-  corpus <<- tm::Corpus(DataframeSource(data),
+  corpus <<- tm::Corpus(tm::DataframeSource(data),
                         readerControl = list(language = c("en", "es", "fr", "de", "it")))
   #meta(corpus)
 
   # Preprocessing chain
-  processedCorpus <- tm::tm_map(corpus, content_transformer(tolower))
-  processedCorpus <- tm::tm_map(processedCorpus, removeWords, english_stopwords)
-  processedCorpus <- tm::tm_map(processedCorpus, removeWords, spanish_stopwords)
-  processedCorpus <- tm::tm_map(processedCorpus, removeWords, french_stopwords)
-  processedCorpus <- tm::tm_map(processedCorpus, removeWords, german_stopwords)
-  processedCorpus <- tm::tm_map(processedCorpus, removePunctuation, preserve_intra_word_dashes = TRUE)
-  processedCorpus <- tm::tm_map(processedCorpus, removeNumbers)
-  processedCorpus <- tm::tm_map(processedCorpus, stemDocument, language = "en")
-  processedCorpus <- tm::tm_map(processedCorpus, stemDocument, language = "es")
-  processedCorpus <- tm::tm_map(processedCorpus, stemDocument, language = "fr")
-  processedCorpus <- tm::tm_map(processedCorpus, stemDocument, language = "de")
-  processedCorpus <- tm::tm_map(processedCorpus, stripWhitespace)
+  processedCorpus <- tm::tm_map(corpus, tm::content_transformer(tolower))
+  processedCorpus <- tm::tm_map(processedCorpus, tm::removeWords, english_stopwords)
+  processedCorpus <- tm::tm_map(processedCorpus, tm::removeWords, spanish_stopwords)
+  processedCorpus <- tm::tm_map(processedCorpus, tm::removeWords, french_stopwords)
+  processedCorpus <- tm::tm_map(processedCorpus, tm::removeWords, german_stopwords)
+  processedCorpus <- tm::tm_map(processedCorpus, tm::removePunctuation, preserve_intra_word_dashes = TRUE)
+  processedCorpus <- tm::tm_map(processedCorpus, tm::removeNumbers)
+  processedCorpus <- tm::tm_map(processedCorpus, tm::stemDocument, language = "en")
+  processedCorpus <- tm::tm_map(processedCorpus, tm::stemDocument, language = "es")
+  processedCorpus <- tm::tm_map(processedCorpus, tm::stemDocument, language = "fr")
+  processedCorpus <- tm::tm_map(processedCorpus, tm::stemDocument, language = "de")
+  processedCorpus <- tm::tm_map(processedCorpus, tm::stripWhitespace)
 
   processedCorpus <<- processedCorpus
 

@@ -19,12 +19,12 @@ lexis_transform <- function(data, orig_data) {
   # need to get full list of Lexis languages
   result_clean <- result_clean %>%
     mutate(.,
-           neg_news = as.integer(tidyverse::str_detect(keyword_ln,"NEGATIVE NEWS")),
-           french =  as.integer(tidyverse::str_detect(keyword_ln,"FRENCH")),
-           english =  as.integer(tidyverse::str_detect(keyword_ln,"ENGLISH|English")),
-           spanish =  as.integer(tidyverse::str_detect(keyword_ln,"SPANISH")),
-           italian =  as.integer(tidyverse::str_detect(keyword_ln,"ITALIAN")),
-           german =  as.integer(tidyverse::str_detect(keyword_ln,"GERMAN"))
+           neg_news = as.integer(stringr::str_detect(keyword_ln,"NEGATIVE NEWS")),
+           french =  as.integer(stringr::str_detect(keyword_ln,"FRENCH")),
+           english =  as.integer(stringr::str_detect(keyword_ln,"ENGLISH|English")),
+           spanish =  as.integer(stringr::str_detect(keyword_ln,"SPANISH")),
+           italian =  as.integer(stringr::str_detect(keyword_ln,"ITALIAN")),
+           german =  as.integer(stringr::str_detect(keyword_ln,"GERMAN"))
     )
 
   # Extract article language from dummy variables into a string
@@ -38,7 +38,7 @@ lexis_transform <- function(data, orig_data) {
     )
 
   # Convert pub_date to date type
-  result_clean$pub_date <- tidyverse::str_extract(result_clean$pub_date,
+  result_clean$pub_date <- stringr::str_extract(result_clean$pub_date,
                                                   "[0-9]{4}[.-][0-9]{2}[.-][0-9]{2}")
   result_clean$pub_date <- lubridate::ymd(result_clean$pub_date)
 
