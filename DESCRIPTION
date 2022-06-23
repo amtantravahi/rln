@@ -3,6 +3,7 @@ Type: Package
 Title: rln: R Package for Lexis Nexis Web Services API
 Version: 0.1.0
 Author: Adityamohan Tantravahi
+Date: 06/23/2022
 Maintainer: Adityamohan Tantravahi <at34@princeton.edu>
 Description: This package is designed to help researchers extract, transform, and load data from the Lexis Nexis Web Services API. It extracts the data in its original format, converts it to JSON, and parses the data into readable text data, and a processed corpus for text analysis.
 License: MIT
