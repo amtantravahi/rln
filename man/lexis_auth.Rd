@@ -31,7 +31,7 @@ This is your secret key provided by Lexis Nexis.
 }
 \author{
 %%  ~~who you are~~
-Adityamohan Tantravahi, at34@princeton.edu
+Adityamohan Tantravahi <at34@princeton.edu>
 }
 \note{
 %%  ~~further notes~~
