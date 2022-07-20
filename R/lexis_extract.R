@@ -3,6 +3,8 @@
 ################## Lexis Extraction function
 lexis_extract <- function(searchdata, url, searchdata_id, result_id) {
 
+  tryCatch(
+    {
 
     # Make get request
     request <- httr::GET(url,
@@ -62,5 +64,8 @@ lexis_extract <- function(searchdata, url, searchdata_id, result_id) {
 
     # garbage collection
     gc()
+    }
+  )
+
 
 }
