@@ -34,6 +34,9 @@ lexis_extract <- function(searchdata, url, searchdata_id, result_id) {
     data <- list()
     i <- 1
 
+    tryCatch({
+
+
     while(!is.null(next_url)) {
       x <- httr::GET(apiresponse$`@odata.nextLink`,
                      httr::config(token = auth.code))
@@ -46,6 +49,8 @@ lexis_extract <- function(searchdata, url, searchdata_id, result_id) {
       data[[i]] <- temp
       i <- i + 1
     }
+
+    })
 
     # Combine data from pagination
     result_full <- dplyr::bind_rows(data, apidata, .id = "column_label")
