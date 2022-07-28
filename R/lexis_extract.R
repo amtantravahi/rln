@@ -3,8 +3,7 @@
 ################## Lexis Extraction function
 lexis_extract <- function(searchdata, url, searchdata_id, result_id) {
 
-  tryCatch(
-    {
+
 
     # Make get request
     request <- httr::GET(url,
@@ -34,7 +33,7 @@ lexis_extract <- function(searchdata, url, searchdata_id, result_id) {
     data <- list()
     i <- 1
 
-    tryCatch({
+
 
 
     while(!is.null(next_url)) {
@@ -50,7 +49,7 @@ lexis_extract <- function(searchdata, url, searchdata_id, result_id) {
       i <- i + 1
     }
 
-    })
+
 
     # Combine data from pagination
     result_full <- dplyr::bind_rows(data, apidata, .id = "column_label")
@@ -69,8 +68,8 @@ lexis_extract <- function(searchdata, url, searchdata_id, result_id) {
 
     # garbage collection
     gc()
-    }
-  )
+
+
 
 
 }
