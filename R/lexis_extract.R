@@ -29,6 +29,8 @@ lexis_extract <- function(searchdata, url, searchdata_id, result_id) {
     # Extract data from first 10 responses
     apidata <- apiresponse$value
 
+    Sys.sleep(5)
+
     # Pagination API requests
     data <- list()
     i <- 1
@@ -47,6 +49,8 @@ lexis_extract <- function(searchdata, url, searchdata_id, result_id) {
       rownames(temp) <- NULL
       data[[i]] <- temp
       i <- i + 1
+
+      Sys.sleep(5)
     }
 
 
