@@ -1,7 +1,7 @@
 # Adi Tantravahi
 
 ################## Lexis Extraction function
-lexis_extract <- function(searchdata, url, searchdata_id, result_id) {
+lexis_extract <- function(searchdata, url, searchdata_id, result_id, sleep) {
 
 
 
@@ -50,7 +50,8 @@ lexis_extract <- function(searchdata, url, searchdata_id, result_id) {
       data[[i]] <- temp
       i <- i + 1
 
-      Sys.sleep(5)
+      #Sys.sleep(5)
+      Sys.sleep(sleep)
     }
 
 
