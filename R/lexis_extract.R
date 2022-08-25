@@ -6,7 +6,7 @@ lexis_extract <- function(searchdata, url, searchdata_id, result_id, sleep) {
 
 
     # Make get request
-    request <- httr::GET(url,
+    request <<- httr::GET(url,
                          httr::config(token = auth.code))
     print(url)
 
@@ -21,12 +21,11 @@ lexis_extract <- function(searchdata, url, searchdata_id, result_id, sleep) {
     apiresponse <- jsonlite::fromJSON(this.raw.content, flatten = T, simplifyDataFrame = TRUE)
 
     # Obtain next link for pagination
-    # Lexis API only does 10 responses a page
-    next_url <- apiresponse$`@odata.nextLink`
+    next_url <<- apiresponse$`@odata.nextLink`
 
     print(next_url)
 
-    # Extract data from first 10 responses
+    # Extract data from first responses
     apidata <- apiresponse$value
 
     #Sys.sleep(5)
@@ -44,7 +43,7 @@ lexis_extract <- function(searchdata, url, searchdata_id, result_id, sleep) {
                      httr::config(token = auth.code))
       this.raw.content <- rawToChar(x$content)
       apiresponse <- jsonlite::fromJSON(this.raw.content, flatten = T, simplifyDataFrame = TRUE)
-      next_url <- apiresponse$`@odata.nextLink`
+      next_url <<- apiresponse$`@odata.nextLink`
       print(next_url)
       temp <- apiresponse$value
       rownames(temp) <- NULL
