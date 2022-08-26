@@ -21,6 +21,7 @@ lexis_extract <- function(searchdata, url, searchdata_id, result_id, sleep) {
     apiresponse <- jsonlite::fromJSON(this.raw.content, flatten = T, simplifyDataFrame = TRUE)
 
     # Obtain next link for pagination
+    next_url <<- NULL
     next_url <<- apiresponse$`@odata.nextLink`
 
     print(next_url)
