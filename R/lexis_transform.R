@@ -101,10 +101,10 @@ lexis_transform <- function(data, orig_data) {
   final_result <<- dplyr::left_join(result_clean, result, by = "lexis_id")
 
   # Mark duplicate titles
-  final_result$title_lower <- tolower(final_result$title)
-  final_result$title_duplicate <- duplicated(final_result$title_lower, fromLast = F)
-  final_result <- subset(final_result, select = -c(title_lower))
-  final_result <- final_result %>%
+  final_result$title_lower <<- tolower(final_result$title)
+  final_result$title_duplicate <<- duplicated(final_result$title_lower, fromLast = F)
+  final_result <<- subset(final_result, select = -c(title_lower))
+  final_result <<- final_result %>%
     dplyr::select(title, title_duplicate, everything())
 
   # Rearange vars
