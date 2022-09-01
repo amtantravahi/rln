@@ -101,7 +101,7 @@ lexis_transform <- function(data, orig_data) {
   final_result <<- dplyr::left_join(result_clean, result, by = "lexis_id")
 
   # Mark duplicate titles
-  final_result$title_duplicate <<- duplicated(final_result$title, fromLast = F)
+  final_result$title_duplicate <<- duplicated(tolower(final_result$title), fromLast = F)
 
   # Rearange vars
   #result <- result %>%
