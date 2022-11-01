@@ -3,16 +3,16 @@
 ################################################################################ PAGER
 # This function extracts data stored in XML format within the
 # result$Document.Content variable we extracted from the API
-pager <- function(x) {
+pager <- function(data) {
 
   `%>%` <- magrittr::`%>%`
 
 
   # Parse data as XML
-  doc <- xml2::read_xml(x)
+  doc <- xml2::read_xml(data)
 
   # Parse as HTML for any HTML stored in the string
-  doc_html <- xml2::read_html(x)
+  doc_html <- xml2::read_html(data)
 
   # Extract data into a seperate dataframe
   data.frame(title = doc %>%

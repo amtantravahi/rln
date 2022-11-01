@@ -29,7 +29,7 @@ you'll want to use result_full$Document.Content
   \item{orig_data}{
 %%     ~~Describe \code{orig_data} here~~
 orig_data refers to the dataframe being used to tranform the data. In most cases,
-this will be result_full.
+this will be the result_full dataframe output from lexis_extract.
 }
 }
 \details{
