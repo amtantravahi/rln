@@ -25,19 +25,20 @@ lexis_transform <- function(data, orig_data) {
            spanish =  as.integer(stringr::str_detect(keyword_ln,"SPANISH")),
            italian =  as.integer(stringr::str_detect(keyword_ln,"ITALIAN|Italiano|Italian")),
            german =  as.integer(stringr::str_detect(keyword_ln,"GERMAN")),
-           dutch =  as.integer(stringr::str_detect(keyword_ln,"DUTCH"))
+           dutch =  as.integer(stringr::str_detect(keyword_ln,"DUTCH")),
+           polish =  as.integer(stringr::str_detect(keyword_ln," POLISH|POLSKI"))
     )
 
   # Extract article language from dummy variables into a string
   result_clean <- result_clean %>%
-    mutate(.,
-           language = ifelse(french == 1, "French",
-                             ifelse(english == 1, "English",
-                                    ifelse(spanish == 1, "Spanish",
-                                           ifelse(german == 1, "German",
-                                                  ifelse(italian == 1, "Italian",
-                                                         ifelse(dutch == 1, "Dutch", ""))))))
-    )
+    mutate(language = case_when(french == 1 ~ "French",
+                                english == 1 ~ "English",
+                                spanish == 1 ~ "Spanish",
+                                german == 1 ~ "German",
+                                italian == 1 ~ "Italian",
+                                dutch == 1 ~ "Dutch",
+                                polish == 1 ~ "Polish",
+                                TRUE ~ ""))
 
   # Convert pub_date to date type
   result_clean$pub_date <- stringr::str_extract(result_clean$pub_date,
@@ -56,7 +57,8 @@ lexis_transform <- function(data, orig_data) {
                      "COLUMN,", "Magazine,", "NEGATIVE PERSONAL NEWS,", "  NEGATIVE MISC NEWS,",
                      "NEGATIVE NEWS,", "Newspaper;", "BLOGS & MESSAGE BOARDS,", "NEWSPAPER,",
                      "Newsletter,", "Newsletters,", "Giornale,", "ITALIANO,", "Agenzia Stampa,",
-                     "NEWS BRIEFS,", "News,", "General News,", "DUTCH,", "Periódico,", "Italian / Italiano,"
+                     "NEWS BRIEFS,", "News,", "General News,", "DUTCH,", "Periódico,", "Italian / Italiano,",
+                     "Polish,", "POLSKI,", "Country & Region Reports,"
                      )
 
   result_clean$keyword <- sapply(result_clean$keyword_ln, function(x)
